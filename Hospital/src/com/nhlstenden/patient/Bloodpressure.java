@@ -1,3 +1,5 @@
+package com.nhlstenden.patient;
+
 public class Bloodpressure
 {
     private int systolic;

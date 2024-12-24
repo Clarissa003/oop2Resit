@@ -1,3 +1,8 @@
+package com.nhlstenden.icu;
+
+import com.nhlstenden.devices.Device;
+import com.nhlstenden.patient.Patient;
+
 import java.util.ArrayList;
 
 public class Bed
@@ -5,7 +10,8 @@ public class Bed
     private ArrayList<Device> devices;
     private Patient patient;
 
-    public Bed(ArrayList<Device> devices) {
+    public Bed(ArrayList<Device> devices)
+    {
         this.devices = devices;
         this.patient = null;
     }
@@ -29,5 +35,14 @@ public class Bed
     public void addDevice (Device device)
     {
         this.devices.add(device);
+    }
+
+    public boolean isEmpty()
+    {
+        if(getPatient() != null)
+        {
+            return false;
+        }
+        return true;
     }
 }
