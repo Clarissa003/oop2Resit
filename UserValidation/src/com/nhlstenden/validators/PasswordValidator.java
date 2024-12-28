@@ -118,22 +118,22 @@ public class PasswordValidator implements Validator
     public boolean validate(UserAccount userAccount) {
         String password = userAccount.getPassword();
 
-        if (allowsSpaces != hasSpaces(password)) {
-            return false;
+        if (this.allowsSpaces == hasSpaces(password)) {
+            return true;
         }
-        if (allowsSpecialCharacters != hasSpecialCharacters(password)) {
-            return false;
+        if (this.allowsSpecialCharacters == hasSpecialCharacters(password)) {
+            return true;
         }
-        if (allowsNumbers != hasNumbers(password)) {
-            return false;
+        if (this.allowsNumbers == hasNumbers(password)) {
+            return true;
         }
-        if (allowsLowercase != hasLowercase(password)) {
-            return false;
+        if (this.allowsLowercase == hasLowercase(password)) {
+            return true;
         }
-        if (allowsUppercase != hasUppercase(password)) {
-            return false;
+        if (this.allowsUppercase == hasUppercase(password)) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
