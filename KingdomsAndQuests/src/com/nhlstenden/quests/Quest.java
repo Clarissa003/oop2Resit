@@ -1,5 +1,7 @@
 package com.nhlstenden.quests;
 
+import com.nhlstenden.player.Player;
+
 public class Quest
 {
     private int xp;
@@ -29,5 +31,18 @@ public class Quest
     public void setDifficultyLevel(int difficultyLevel)
     {
         this.difficultyLevel = difficultyLevel;
+    }
+
+    public int getNeededXp()
+    {
+        int neededXp = 0;
+        neededXp = this.difficultyLevel * 10;
+        return neededXp;
+    }
+
+    public void play(Player player , Character character)
+    {
+        int originalXp = player.getEarnedXp();
+        player.setEarnedItems(originalXp + this.xp);
     }
 }

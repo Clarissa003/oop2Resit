@@ -59,4 +59,25 @@ public class Player
     {
         this.earnedItems = earnedItems;
     }
+
+    public boolean canPlay()
+    {
+        for(Quest quest : this.quests)
+        {
+            if(this.getEarnedXp() >= quest.getNeededXp())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean levelUp()
+    {
+        if(this.getEarnedXp() >= 200)
+        {
+            return true;
+        }
+        return false;
+    }
 }

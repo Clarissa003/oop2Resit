@@ -12,6 +12,7 @@ public class Warrior extends Character
     @Override
     public void useSpecialAbility()
     {
-
+        int originalAttackPower = this.getAttackPower();
+        setAttackPower(originalAttackPower++);
     }
 }

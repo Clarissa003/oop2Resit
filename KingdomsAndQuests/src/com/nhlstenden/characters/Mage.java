@@ -12,6 +12,7 @@ public class Mage extends Character
     @Override
     public void useSpecialAbility()
     {
-
+        int originalDefense = this.getDefense();
+        this.setDefense(originalDefense++);
     }
 }

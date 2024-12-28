@@ -12,6 +12,7 @@ public class Archer extends Character
     @Override
     public void useSpecialAbility()
     {
-
+        int originalDamage = this.getDamage();
+        this.setDamage(originalDamage * 2);
     }
 }

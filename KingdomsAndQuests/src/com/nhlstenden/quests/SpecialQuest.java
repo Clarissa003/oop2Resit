@@ -1,5 +1,6 @@
 package com.nhlstenden.quests;
 
+import com.nhlstenden.player.Player;
 import com.nhlstenden.quests.Quest;
 
 import java.util.ArrayList;
@@ -22,5 +23,14 @@ public class SpecialQuest extends Quest
     public void setItems(ArrayList<Item> items)
     {
         this.items = items;
+    }
+
+    @Override
+    public void play(Player player, Character character)
+    {
+        super.play(player, character);
+
+        int originalItemsNr = player.getEarnedItems();
+        player.setEarnedItems(originalItemsNr + this.items.size());
     }
 }
