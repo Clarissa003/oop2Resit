@@ -66,19 +66,4 @@ public class User
         return age;
     }
 
-    public void downloadApp(App app) throws DownloadNotAllowedException
-    {
-        if(app.isContainsNudity() && this.getAge() >= 18)
-        {
-            this.apps.add(app);
-        }
-        if(app.isContainsViolence() && this.getAge() >= 16)
-        {
-            this.apps.add(app);
-        }
-        else
-        {
-            throw new DownloadNotAllowedException("You do not meet the conditions to download this app");
-        }
-    }
 }

@@ -1,13 +1,15 @@
 package com.nhlstenden.appstores;
 
 import com.nhlstenden.appstores.AppStore;
+import com.nhlstenden.user.App;
 import com.nhlstenden.user.User;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class GooglePlayStore extends AppStore
 {
-    public GooglePlayStore(Currency currency, HashMap<User, App> purchases)
+    public GooglePlayStore(Currency currency, HashMap<User, List<App>> purchases)
     {
         super(currency, purchases);
     }
@@ -26,10 +28,15 @@ public class GooglePlayStore extends AppStore
     {
         double totalAppRevenue = 0;
 
-        if(this.getPurchases().containsKey(app))
-        {
-            totalAppRevenue += app.getPrice() - 0.3 * (app.getPrice());
+        // Iterate over all user purchases
+        for (List<App> apps : this.getPurchases().values()) {
+            // Count how many times the specific app was purchased
+            for (App purchasedApp : apps) {
+                if (purchasedApp.equals(app)) {
+                    totalAppRevenue += app.getPrice();
+                }
+            }
         }
-        return totalAppRevenue;
+        return totalAppRevenue - 0.3 * (totalAppRevenue);
     }
 }

@@ -1,17 +1,20 @@
 package com.nhlstenden.appstores;
 
+import com.nhlstenden.user.App;
+import com.nhlstenden.user.DownloadNotAllowedException;
 import com.nhlstenden.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class AppStore
 {
     private Currency currency;
-    private HashMap<User, App> purchases;
+    private HashMap<User, List<App>> purchases;
     private ArrayList<App> apps;
 
-    public AppStore(Currency currency, HashMap<User, App> purchases)
+    public AppStore(Currency currency, HashMap<User, List<App>> purchases)
     {
         this.currency = currency;
         this.purchases = purchases;
@@ -28,12 +31,12 @@ public abstract class AppStore
         this.currency = currency;
     }
 
-    public HashMap<User, App> getPurchases()
+    public HashMap<User, List<App>> getPurchases()
     {
         return purchases;
     }
 
-    public void setPurchases(HashMap<User, App> purchases)
+    public void setPurchases(HashMap<User, List<App>> purchases)
     {
         this.purchases = purchases;
     }
@@ -47,7 +50,6 @@ public abstract class AppStore
     {
         this.apps = apps;
     }
-
     public abstract void uploadApp(App app);
     public abstract double getTotalAppRevenue(App app);
 
@@ -55,10 +57,26 @@ public abstract class AppStore
     {
         double totalRevenue = 0;
 
-        for(App app : this.getApps())
-        {
-            totalRevenue += getTotalAppRevenue(app);
+        for (App app : this.apps) {
+            totalRevenue += this.getTotalAppRevenue(app);
         }
         return totalRevenue;
+    }
+
+    public void purchaseApp(User user, App app) throws DownloadNotAllowedException
+    {
+        if(app.isContainsNudity() && user.getAge() >= 18)
+        {
+            this.purchases.computeIfAbsent(user, k -> new ArrayList<>()).add(app);
+
+        }
+        if(app.isContainsViolence() && user.getAge() >= 16)
+        {
+            this.purchases.computeIfAbsent(user, k -> new ArrayList<>()).add(app);
+        }
+        else
+        {
+            throw new DownloadNotAllowedException("You do not meet the conditions to download this app");
+        }
     }
 }
