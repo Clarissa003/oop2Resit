@@ -50,7 +50,7 @@ public abstract class AppStore
     {
         this.apps = apps;
     }
-    public abstract void uploadApp(App app);
+    public abstract void uploadApp(App app) throws Exception;
     public abstract double getTotalAppRevenue(App app);
 
     public double getTotalRevenue()

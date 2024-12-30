@@ -52,6 +52,15 @@ class AppStoreTest
     }
 
     @Test
+    void uploadApp_exception()
+    {
+        this.googleplaystore.getApps().add(app2);
+        assertThrows(Exception.class, () -> {
+            this.googleplaystore.uploadApp(app2);
+        });
+    }
+
+    @Test
     void getTotalAppRevenue_gp()
     {
         assertEquals(3.5,this.googleplaystore.getTotalAppRevenue(app));
@@ -75,6 +84,14 @@ class AppStoreTest
         this.applestore.getApps().add(app2);
         applestore.purchaseApp(user,app2);
         assertTrue(applestore.getPurchases().get(user).contains(app2));
+    }
 
+    @Test
+    void purchaseApp_exception()
+    {
+        User user2 = new User("Alicia","alicia.rb@gmail.com",LocalDate.of(2020,4,12));
+        assertThrows(DownloadNotAllowedException.class, () -> {
+            this.applestore.purchaseApp(user2,app);
+        });
     }
 }

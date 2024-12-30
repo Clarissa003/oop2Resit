@@ -15,11 +15,15 @@ public class GooglePlayStore extends AppStore
     }
 
     @Override
-    public void uploadApp(App app)
+    public void uploadApp(App app) throws Exception
     {
         if(!app.isContainsNudity())
         {
             this.getApps().add(app);
+        }
+        else
+        {
+            throw new Exception("Apps that contain nudity are not allowed on this store");
         }
     }
 
