@@ -2,7 +2,7 @@ package com.nhlstenden.plane;
 
 import java.util.HashSet;
 
-public class Plane
+public abstract class Plane
 {
     private double currentFuelLevel;
     private String code;
@@ -56,4 +56,93 @@ public class Plane
     {
         this.seats = seats;
     }
+
+    public int getSeatsAvailable()
+    {
+        HashSet<Seat> availableSeats = new HashSet<>();
+        for(Seat seat : this.seats)
+        {
+            if(seat.isAvailable())
+            {
+                availableSeats.add(seat);
+            }
+        }
+        return availableSeats.size();
+    }
+
+    public int getSeatsTaken()
+    {
+        int seatsTaken = 0;
+
+        seatsTaken = this.getSeats().size() - getSeatsAvailable();
+        return seatsTaken;
+    }
+
+    public int getTotalLuggageWeight()
+    {
+        int totalLuggageWeight = 0;
+
+        for(Luggage luggage : this.luggages)
+        {
+            totalLuggageWeight += luggage.getWeight();
+        }
+        return totalLuggageWeight;
+    }
+
+    public int getEconomySeatsTaken()
+    {
+        HashSet<Seat> economySeatsTaken = new HashSet<>();
+
+        for(Seat seat : this.seats)
+        {
+            if(!seat.isAvailable() && seat.getSeatType().equals(SeatType.ECONOMY))
+            {
+                economySeatsTaken.add(seat);
+            }
+        }
+        return economySeatsTaken.size();
+    }
+
+    public int getBusinessSeatsTaken()
+    {
+        HashSet<Seat> businessSeatsTaken = new HashSet<>();
+
+        for(Seat seat : this.seats)
+        {
+            if(!seat.isAvailable() && seat.getSeatType().equals(SeatType.BUSINESS))
+            {
+                businessSeatsTaken.add(seat);
+            }
+        }
+        return businessSeatsTaken.size();
+    }
+
+    public int getEconomySeats()
+    {
+        HashSet<Seat> economySeats = new HashSet<>();
+
+        for(Seat seat : this.seats)
+        {
+            if(seat.getSeatType().equals(SeatType.ECONOMY))
+            {
+                economySeats.add(seat);
+            }
+        }
+        return economySeats.size();
+    }
+
+    public int getBusinessSeats()
+    {
+        HashSet<Seat> businessSeats = new HashSet<>();
+
+        for(Seat seat : this.seats)
+        {
+            if(seat.getSeatType().equals(SeatType.BUSINESS))
+            {
+                businessSeats.add(seat);
+            }
+        }
+        return businessSeats.size();
+    }
+    public abstract double getFuel(int distance);
 }

@@ -30,4 +30,12 @@ public class Seat
     {
         isAvailable = available;
     }
+
+    public void reserveSeat()
+    {
+        if(this.isAvailable)
+        {
+            this.setAvailable(false);
+        }
+    }
 }

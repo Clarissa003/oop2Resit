@@ -1,5 +1,7 @@
 package com.nhlstenden.flight;
 
+import com.nhlstenden.plane.Plane;
+
 import java.time.LocalDateTime;
 
 public class Flight
@@ -67,5 +69,21 @@ public class Flight
     public void setStatus(Status status)
     {
         this.status = status;
+    }
+
+    public int getDistance()
+    {
+        int distance = 0;
+        distance = DistanceCalculator.getDistance(this.getDeparture(),this.getDestination());
+        return distance;
+    }
+
+    public boolean canDepart()
+    {
+        if(this.getPlane().getCurrentFuelLevel() >= this.getPlane().getFuel(this.getDistance()))
+        {
+            return true;
+        }
+        return false;
     }
 }

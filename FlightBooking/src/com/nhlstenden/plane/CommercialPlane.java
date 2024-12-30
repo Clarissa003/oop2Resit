@@ -10,4 +10,13 @@ public class CommercialPlane extends Plane
     {
         super(currentFuelLevel, code, luggages, seats);
     }
+
+    @Override
+    public double getFuel(int distance)
+    {
+        double fuel = 0;
+
+        fuel = this.getEconomySeats() * 1.75 + this.getBusinessSeats() * 1.98 * distance + this.getEconomySeatsTaken() * 2.02 + this.getBusinessSeatsTaken() * 2.87 + this.getTotalLuggageWeight() * 0.3;
+        return fuel;
+    }
 }

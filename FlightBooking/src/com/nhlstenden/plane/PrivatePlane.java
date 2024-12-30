@@ -10,4 +10,13 @@ public class PrivatePlane extends Plane
     {
         super(currentFuelLevel, code, luggages, seats);
     }
+
+    @Override
+    public double getFuel(int distance)
+    {
+        double fuel = 0;
+
+        fuel = this.getSeats().size() * 1.31 * distance + this.getSeatsTaken() * 1.87 + this.getTotalLuggageWeight() * 0.4;
+        return fuel;
+    }
 }
