@@ -22,4 +22,9 @@ public class Flight24Uploader
     {
         this.information = information;
     }
+
+    public void upload(Flight24 info)
+    {
+        this.information.add(info);
+    }
 }

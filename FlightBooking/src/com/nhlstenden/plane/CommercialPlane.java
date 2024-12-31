@@ -19,4 +19,10 @@ public class CommercialPlane extends Plane
         fuel = this.getEconomySeats() * 1.75 + this.getBusinessSeats() * 1.98 * distance + this.getEconomySeatsTaken() * 2.02 + this.getBusinessSeatsTaken() * 2.87 + this.getTotalLuggageWeight() * 0.3;
         return fuel;
     }
+
+    @Override
+    public void addLuggage(Luggage luggage)
+    {
+        this.getLuggages().add(luggage);
+    }
 }

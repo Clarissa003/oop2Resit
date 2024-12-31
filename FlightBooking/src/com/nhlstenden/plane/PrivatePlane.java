@@ -19,4 +19,13 @@ public class PrivatePlane extends Plane
         fuel = this.getSeats().size() * 1.31 * distance + this.getSeatsTaken() * 1.87 + this.getTotalLuggageWeight() * 0.4;
         return fuel;
     }
+
+    @Override
+    public void addLuggage(Luggage luggage)
+    {
+        if(!luggage.getLuggageType().equals(LuggageType.HOLD))
+        {
+            this.getLuggages().add(luggage);
+        }
+    }
 }

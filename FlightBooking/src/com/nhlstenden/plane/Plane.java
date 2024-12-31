@@ -1,8 +1,11 @@
 package com.nhlstenden.plane;
 
+import com.nhlstenden.flight24.Flight24;
+
+import java.lang.runtime.SwitchBootstraps;
 import java.util.HashSet;
 
-public abstract class Plane
+public abstract class Plane implements Flight24
 {
     private double currentFuelLevel;
     private String code;
@@ -57,7 +60,7 @@ public abstract class Plane
         this.seats = seats;
     }
 
-    public int getSeatsAvailable()
+    public HashSet<Seat> getSeatsAvailable()
     {
         HashSet<Seat> availableSeats = new HashSet<>();
         for(Seat seat : this.seats)
@@ -67,14 +70,14 @@ public abstract class Plane
                 availableSeats.add(seat);
             }
         }
-        return availableSeats.size();
+        return availableSeats;
     }
 
     public int getSeatsTaken()
     {
         int seatsTaken = 0;
 
-        seatsTaken = this.getSeats().size() - getSeatsAvailable();
+        seatsTaken = this.getSeats().size() - getSeatsAvailable().size();
         return seatsTaken;
     }
 
@@ -145,4 +148,25 @@ public abstract class Plane
         return businessSeats.size();
     }
     public abstract double getFuel(int distance);
+
+    @Override
+    public String getInformation()
+    {
+        return "P:" + " " + this.getCode() + "." + " " + this.getCurrentFuelLevel() + " " + "liter fuel." + " " + this.getSeatsAvailable().size() + " " + "empty seats.";
+    }
+
+    public Seat getFirstAvailableSeat()
+    {
+        Seat firstAvailableSeat = null;
+        for(Seat seat : this.seats)
+        {
+            if(firstAvailableSeat == null || this.getSeatsAvailable().size() >= 1 && seat.isAvailable())
+            {
+                firstAvailableSeat = seat;
+            }
+        }
+        return firstAvailableSeat;
+    }
+
+    public abstract void addLuggage(Luggage luggage);
 }

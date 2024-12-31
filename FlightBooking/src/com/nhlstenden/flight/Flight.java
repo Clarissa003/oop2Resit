@@ -1,10 +1,11 @@
 package com.nhlstenden.flight;
 
+import com.nhlstenden.flight24.Flight24;
 import com.nhlstenden.plane.Plane;
 
 import java.time.LocalDateTime;
 
-public class Flight
+public class Flight implements Flight24
 {
     private Plane plane;
     private Airport destination;
@@ -82,8 +83,14 @@ public class Flight
     {
         if(this.getPlane().getCurrentFuelLevel() >= this.getPlane().getFuel(this.getDistance()))
         {
-            return true;
+            this.setStatus(Status.DEPARTED);
         }
         return false;
+    }
+
+    @Override
+    public String getInformation()
+    {
+        return "F:" + " " + this.getDeparture() + "->" + this.getDestination() + "." + " " + "Departure" + " " + this.getDepartureDate();
     }
 }
